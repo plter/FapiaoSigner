@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PDF签章工具</title>
+
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="node_modules/pdfjs-dist/build/pdf.js"></script>
+    <script src="node_modules/vue/dist/vue.min.js"></script>
+    <script src="node_modules/pdf-lib/dist/pdf-lib.min.js"></script>
+
+    <style>
+        html, body, #root {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="root" style="display: flex;flex-direction: row;padding: .5rem;">
+    <div style="display: flex;flex-direction: column;position: relative;flex: 1;">
+        <div style="padding-bottom: 0.5rem;">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-outline-primary" id="btn-import">导入 PDF</button>
+                <button type="button" class="btn btn-outline-primary" id="btn-sign" @click="btnSignClicked">签章</button>
+            </div>
+        </div>
+        <div style="text-align: center;position: absolute;font-size: 14pt;width: 100%;pointer-events: none;"
+             class="font-weight-bold">效果预览
+        </div>
+        <canvas style="overflow: hidden;width: 100%;flex: 1;border-style: solid;border-width: thin;border-radius: 0.5rem;border-color: #cccccc"
+                id="player"></canvas>
+    </div>
+    <div style="padding-left: 0.5rem">
+        <div style="padding-bottom: 0.5rem;">
+            <button class="btn btn-outline-primary" id="btn-choose-sign">选择印鉴</button>
+        </div>
+        <div style="display: flex;flex-direction: row;">
+            <div>x：</div>
+            <input style="width: 80px" type="number" v-model="signX">
+            <div style="padding-left: 0.5rem;">y：</div>
+            <input style="width: 80px" type="number" value="0" v-model="signY">
+        </div>
+        <div style="display: flex;flex-direction: row;padding-top: 0.5rem;">
+            <div>缩放：</div>
+            <input style="width: 80px" type="number" value="1" v-model="signScale">
+        </div>
+        <div style="display: flex;flex-direction: column;padding-top: 0.5rem;">
+            <div>印鉴预览</div>
+            <canvas width="240" height="180" id="sign-preview"></canvas>
+        </div>
+    </div>
+</div>
+
+<script src="./outputs/renderer.js"></script>
+</body>
+</html>
