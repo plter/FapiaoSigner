@@ -10,16 +10,13 @@
     "build_and_watch": "webpack --mode development --watch",
     "package": "electron-builder"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/plter/PDFSigner",
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "pdf",
+    "signer"
   ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
+  "author": "Peter Chen",
+  "license": "MIT License",
   "devDependencies": {
     "electron": "^11.3.0",
     "electron-builder": "^22.9.1",
