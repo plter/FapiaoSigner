@@ -1,7 +1,7 @@
 {
   "name": "pdf-signer",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "PDF Signer",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
