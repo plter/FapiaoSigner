@@ -89,7 +89,11 @@ const Main = {
         this.signRendererCanvasContext2d.clearRect(0, 0, this.signRendererCanvas.width, this.signRendererCanvas.height);
         this.signRendererCanvasContext2d.drawImage(this.pdfCanvas, 0, 0);
         if (this.selectedSign) {
-            this.signRendererCanvasContext2d.drawImage(this.selectedSign, this.vueapp.signX, this.vueapp.signY, this.selectedSign.width * this.vueapp.signScale, this.selectedSign.height * this.vueapp.signScale);
+            let dh = this.selectedSign.height * this.vueapp.signScale;
+            this.signRendererCanvasContext2d.drawImage(
+                this.selectedSign, this.vueapp.signX, this.pdfCanvas.height - dh - this.vueapp.signY,
+                this.selectedSign.width * this.vueapp.signScale, dh
+            );
         }
 
         this.playerContext2d.drawImageToCenter(this.signRendererCanvas);
@@ -118,12 +122,12 @@ const Main = {
                 let signImage = await pdfDoc.embedPng(signImageBytes);
                 let page = pdfDoc.getPages()[0];
 
-                signImage.scale(parseFloat(this.vueapp.signScale));
+                let pngDims = signImage.scale(parseFloat(this.vueapp.signScale));
                 page.drawImage(signImage, {
                     x: parseFloat(this.vueapp.signX),
                     y: parseFloat(this.vueapp.signY),
-                    width: parseFloat(signImage.width),
-                    height: parseFloat(signImage.height)
+                    width: parseFloat(pngDims.width),
+                    height: parseFloat(pngDims.height)
                 });
                 const pdfOutputBytes = await pdfDoc.save();
                 node_fs.writeFile(result.filePath, pdfOutputBytes, function () {
