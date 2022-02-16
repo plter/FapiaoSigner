@@ -1,14 +1,14 @@
 {
-  "name": "pdf-signer",
+  "name": "fapiao-signer",
   "version": "1.0.0",
-  "description": "PDF Signer",
+  "description": "Fapiao Signer",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "install_dependencies": "npm install --registry=https://registry.npm.taobao.org",
-    "build": "webpack --mode development",
-    "build_and_watch": "webpack --mode development --watch",
-    "package": "electron-builder"
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development --watch",
+    "package": "webpack --mode production&&electron-builder"
   },
   "repository": "https://github.com/plter/PDFSigner",
   "keywords": [

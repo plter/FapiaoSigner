@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PDF签章工具</title>
+    <title>发票签章工具</title>
 
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
@@ -24,7 +24,7 @@
     <div style="display: flex;flex-direction: column;position: relative;flex: 1;">
         <div style="padding-bottom: 0.5rem;">
             <div class="btn-group" role="group">
-                <button type="button" class="btn btn-outline-primary" id="btn-import">导入 PDF</button>
+                <button type="button" class="btn btn-outline-primary" id="btn-import" @click="btnImportClicked">导入 PDF</button>
                 <button type="button" class="btn btn-outline-primary" id="btn-sign" @click="btnSignClicked">签章</button>
             </div>
         </div>
@@ -32,11 +32,11 @@
              class="font-weight-bold">效果预览
         </div>
         <canvas style="overflow: hidden;width: 100%;flex: 1;border-style: solid;border-width: thin;border-radius: 0.5rem;border-color: #cccccc"
-                id="player"></canvas>
+                ref="player"></canvas>
     </div>
     <div style="padding-left: 0.5rem">
         <div style="padding-bottom: 0.5rem;">
-            <button class="btn btn-outline-primary" id="btn-choose-sign">选择印鉴</button>
+            <button class="btn btn-outline-primary" id="btn-choose-sign" @click="btnChooseSignClicked">选择印鉴</button>
         </div>
         <div style="display: flex;flex-direction: row;">
             <div>x：</div>
@@ -50,7 +50,7 @@
         </div>
         <div style="display: flex;flex-direction: column;padding-top: 0.5rem;">
             <div>印鉴预览</div>
-            <canvas width="240" height="180" id="sign-preview"></canvas>
+            <canvas width="240" height="180" ref="signPreview"></canvas>
         </div>
     </div>
 </div>
