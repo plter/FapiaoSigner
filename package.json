@@ -19,7 +19,7 @@
   "license": "MIT License",
   "devDependencies": {
     "electron": "^11.3.0",
-    "electron-builder": "^22.9.1",
+    "electron-builder": "^23.0.3",
     "webpack": "^5.24.1",
     "webpack-cli": "^4.5.0"
   },
