@@ -3,3 +3,4 @@ node_modules
 outputs
 dist
 .DS_Store
+package-lock.json
