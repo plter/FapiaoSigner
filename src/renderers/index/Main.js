@@ -5,7 +5,7 @@ import {PDFDocument} from "pdf-lib";
 
 const {pdfjsLib} = globalThis;
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'node_modules/pdfjs-dist/build/pdf.worker.mjs';
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'lib/pdfjs4/pdf.worker.min.mjs';
 
 new Vue({
     el: "#root",
