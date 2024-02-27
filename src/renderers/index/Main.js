@@ -1,8 +1,11 @@
 import "../../extensions/CanvasRenderingContext2DExtension"
 import ImageLoader from "./ImageLoader";
 import LSManager from "./LSManager";
+import {PDFDocument} from "pdf-lib";
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'node_modules/pdfjs-dist/build/pdf.worker.js';
+const {pdfjsLib} = globalThis;
+
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'node_modules/pdfjs-dist/build/pdf.worker.mjs';
 
 new Vue({
     el: "#root",
@@ -75,11 +78,11 @@ new Vue({
         async signPdf() {
             if (this.selectedPdfPath && this.selectedSignPath) {
 
-                let result = await electron.remote.dialog.showSaveDialog(electron.remote.getCurrentWindow(), { defaultPath: "signed_" + node_path.basename(this.selectedPdfPath) });
+                let result = await envapi.dialog.showSaveDialog({defaultPath: "signed_" + envapi.node_path.basename(this.selectedPdfPath)});
 
                 if (!result.canceled) {
                     let pdfBytes = await fetch(this.selectedPdfPath).then(res => res.arrayBuffer());
-                    let pdfDoc = await PDFLib.PDFDocument.load(pdfBytes);
+                    let pdfDoc = await PDFDocument.load(pdfBytes);
 
                     let signImageBytes = await fetch(this.selectedSignPath).then((res) => res.arrayBuffer());
                     let signImage = await pdfDoc.embedPng(signImageBytes);
@@ -93,7 +96,7 @@ new Vue({
                         height: parseFloat(pngDims.height)
                     });
                     const pdfOutputBytes = await pdfDoc.save();
-                    node_fs.writeFile(result.filePath, pdfOutputBytes, function () {
+                    envapi.node_fs.writeFile(result.filePath, pdfOutputBytes, function () {
                     });
                 }
             } else {
@@ -109,7 +112,7 @@ new Vue({
         },
 
         async renderPdfCanvas(page) {
-            let viewport = page.getViewport({ scale: 1 });
+            let viewport = page.getViewport({scale: 1});
             this.pdfCanvas.width = viewport.width;
             this.pdfCanvas.height = viewport.height;
             await page.render({
@@ -119,9 +122,9 @@ new Vue({
         },
 
         async btnImportClicked(e) {
-            let r = await electron.remote.dialog.showOpenDialog(electron.remote.getCurrentWindow(), {
+            let r = await envapi.dialog.showOpenDialog({
                 filters: [
-                    { name: 'PDF', extensions: ['pdf'] },
+                    {name: 'PDF', extensions: ['pdf']},
                 ]
             });
 
@@ -137,9 +140,9 @@ new Vue({
 
         /**
          * No effects if filePath is undefined
-         * 
-         * @param {*} filePath 
-         * @returns 
+         *
+         * @param {*} filePath
+         * @returns
          */
         async loadSignFile(filePath) {
             if (!filePath) {
@@ -150,9 +153,9 @@ new Vue({
         },
 
         async btnChooseSignClicked(e) {
-            let r = await electron.remote.dialog.showOpenDialog(electron.remote.getCurrentWindow(), {
+            let r = await envapi.dialog.showOpenDialog({
                 filters: [
-                    { name: 'PNG', extensions: ['png'] },
+                    {name: 'PNG', extensions: ['png']},
                 ]
             });
             if (r.filePaths && r.filePaths.length) {

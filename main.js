@@ -1,6 +1,14 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
-const path = require('path')
+const {app, BrowserWindow, ipcMain, dialog} = require('electron')
+const path = require('node:path')
+
+ipcMain.handle("showSaveDialog", async function (event, options) {
+    return await dialog.showSaveDialog(BrowserWindow.getFocusedWindow(), options);
+});
+
+ipcMain.handle("showOpenDialog", async function (event, options) {
+    return await dialog.showOpenDialog(BrowserWindow.getFocusedWindow(), options);
+});
 
 function createWindow() {
     // Create the browser window.
@@ -8,8 +16,8 @@ function createWindow() {
         width: 1000,
         height: 600,
         webPreferences: {
-            preload: path.join(__dirname, 'preload.js'),
-            enableRemoteModule: true
+            nodeIntegration: true,
+            preload: path.join(__dirname, 'preload.js')
         }
     })
 

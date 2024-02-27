@@ -18,16 +18,16 @@
   "author": "Peter Chen",
   "license": "MIT License",
   "devDependencies": {
-    "electron": "^11.3.0",
+    "electron": "^29.0.1",
     "electron-builder": "^23.0.3",
+    "pdf-lib": "^1.17.1",
     "webpack": "^5.24.1",
     "webpack-cli": "^4.5.0"
   },
   "dependencies": {
     "bootstrap": "^4.6.0",
     "jquery": "^3.5.1",
-    "pdf-lib": "^1.16.0",
-    "pdfjs-dist": "^2.6.347",
+    "pdfjs-dist": "^4.0.379",
     "vue": "^2.6.12"
   }
 }
